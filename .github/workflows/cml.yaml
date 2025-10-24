@@ -38,7 +38,7 @@ jobs:
           python3 -m pip install --upgrade pip
           pip install pyyaml
           pip install -r requirements.txt
-      -name: Install CML manually
+      - name: Install CML manually
         run: |
           npm install -g @dvcorg/cml
       - name: Run training script
