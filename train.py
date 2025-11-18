@@ -9,10 +9,18 @@ import mlflow
 import mlflow.sklearn
 import matplotlib.pyplot as plt
 import seaborn as sns
+import dagshub
+import warnings
+warnings.filterwarnings("ignore", category=UserWarning, module="pydantic")
+
+
+dagshub.init(repo_owner='JavierRojo8', repo_name='mlops-practica-icai', mlflow=True)
 
 iris = datasets.load_iris()
 X = iris.data
 y = iris.target
+
+mlflow.set_tracking_uri('https://dagshub.com/JavierRojo8/mlops-practica-icai.mlflow')
 
 # Iniciar un experimento de MLflow
 with mlflow.start_run():
@@ -23,7 +31,7 @@ with mlflow.start_run():
     )
 
     # Inicializar y entrenar el modelo
-    model = RandomForestClassifier(n_estimators=100, random_state=42)
+    model = RandomForestClassifier(n_estimators=300, random_state=42)
     model.fit(X_train, y_train)
 
     # Realizar predicciones en el conjunto de prueba
@@ -35,7 +43,7 @@ with mlflow.start_run():
     # Registrar el modelo con MLflow
     mlflow.sklearn.log_model(model, "random-forest-model")
     # Registrar parámetros y métricas
-    mlflow.log_param("n_estimators", 100)
+    mlflow.log_param("n_estimators", 300)
     mlflow.log_metric("accuracy", accuracy)
     print(f"Modelo entrenado y precisión: {accuracy:.4f}")
     print("Experimento registrado con MLflow.")
