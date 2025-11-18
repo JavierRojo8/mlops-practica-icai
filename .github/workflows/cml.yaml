@@ -38,7 +38,7 @@ jobs:
         run: |
           dvc remote modify origin --local access_key_id $DAGSHUB_API_KEY
           dvc remote modify origin --local secret_access_key $DAGSHUB_API_KEY
-          dvc pull -r origin
+          dvc pull -r dagshub
 
       - name: Install dependencies
         run: |
