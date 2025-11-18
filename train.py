@@ -12,13 +12,18 @@ import seaborn as sns
 import dagshub
 import warnings
 warnings.filterwarnings("ignore", category=UserWarning, module="pydantic")
-
-
 dagshub.init(repo_owner='JavierRojo8', repo_name='mlops-practica-icai', mlflow=True)
 
-iris = datasets.load_iris()
-X = iris.data
-y = iris.target
+# Cargar el conjunto de datos desde el archivo CSV
+try:
+ iris = pd.read_csv('data/iris_dataset.csv')
+except FileNotFoundError:
+ print("Error: El archivo 'data/iris_dataset.csv' no fue encontrado.")
+
+# Dividir el DataFrame en características (X) y etiquetas (y)
+X = iris.drop('target', axis=1)
+y = iris['target']
+
 
 mlflow.set_tracking_uri('https://dagshub.com/JavierRojo8/mlops-practica-icai.mlflow')
 
