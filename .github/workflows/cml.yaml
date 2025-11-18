@@ -12,21 +12,25 @@ jobs:
 
       - name: DVC and Python setup
         uses: iterative/setup-dvc@v1
+
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.11'
+
       - name: Configure Git
         run: |
           git config --global user.email "202109117@alu.comillas.edu"
           git config --global user.name "JavierRojo8"
+
       - name: Restore DVC Cache
         uses: actions/cache@v3
         with:
           path: ~/.cache/dvc
           key: dvc-cache-${{ hashFiles('dvc.yaml', 'dvc.lock') }}
           restore-keys: |
-          dvc-cache-
+            dvc-cache-
+
       - name: DVC Pull
         env:
           DAGSHUB_API_KEY: ${{ secrets.DAGSHUB_API_KEY }}
@@ -35,16 +39,20 @@ jobs:
           dvc remote modify origin --local access_key_id $DAGSHUB_API_KEY
           dvc remote modify origin --local secret_access_key $DAGSHUB_API_KEY
           dvc pull -r origin
+
       - name: Install dependencies
         run: |
-          python3 -m pip install --upgrade pip
+          python -m pip install --upgrade pip
           pip install pyyaml
           pip install -r requirements.txt
-      - uses: iterative/setup-cml@v1
+
+      - name: Setup CML
+        uses: iterative/setup-cml@v1
+
       - name: Run training script
         env:
           MLFLOW_TRACKING_USERNAME: ${{ secrets.DAGSHUB_USERNAME }}
           MLFLOW_TRACKING_PASSWORD: ${{ secrets.DAGSHUB_API_KEY }}
           MLFLOW_TRACKING_URI: ${{ secrets.MLFLOW_TRACKING_URI }}
         run: |
-          python3 train.py
+          python train.py
