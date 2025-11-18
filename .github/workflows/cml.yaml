@@ -8,7 +8,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
         with:
-        fetch-depth: 0
+          fetch-depth: 0
 
       - name: DVC and Python setup
         uses: iterative/setup-dvc@v1
@@ -18,8 +18,8 @@ jobs:
           python-version: '3.11
       - name: Configure Git
         run: |
-        git config --global user.email "TUEMAIL"
-        git config --global user.name "TUUSUARIO"
+        git config --global user.email "202109117@alu.comillas.edu"
+        git config --global user.name "JavierRojo8"
       - name: Restore DVC Cache
         uses: actions/cache@v3
         with:
