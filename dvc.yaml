@@ -1,0 +1,18 @@
+stages:
+  prepare:
+    cmd: echo "Verificando que los datos existen..."
+    deps:
+      - data/iris_dataset.csv
+  train:
+    cmd: python train.py --n_estimators ${train.n_estimators}
+    deps:
+      - train.py
+      - requirements.txt
+      - data/iris_dataset.csv
+    outs:
+      - model.pkl
+      - confusion_matrix.png
+    metrics:
+      - mlflow_metrics.json
+    params:
+      - train.n_estimators

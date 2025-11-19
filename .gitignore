@@ -3,3 +3,4 @@ __pycache__/
 *.json
 mlruns/
 .venv311
+/confusion_matrix.png
