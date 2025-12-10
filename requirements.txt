@@ -1,8 +1,10 @@
 scikit-learn>=1.4,<1.6
 pandas==2.2.2
 numpy==1.26.4
-dvc==3.32.0
+dvc
 mlflow==2.8.0
 matplotlib==3.8.0
 seaborn==0.12.2
 dagshub
+flask
+streamlit
