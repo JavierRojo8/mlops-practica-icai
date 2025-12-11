@@ -1,12 +1,12 @@
 services:
   mlops-api:
-    image: juanviz/mlops-api
+    image: javierrojo/mlops-api
     container_name: mlops-api
     ports:
       - "5000:5000"
     restart: always
   mlops-web:
-    image: juanviz/mlops-web
+    image: javierrojo/mlops-web
     container_name: mlops-web
     ports:
       - "8501:8501"
